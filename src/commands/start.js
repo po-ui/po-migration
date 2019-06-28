@@ -5,7 +5,6 @@ const migration = require('../migration');
 
 function start(path, options) {
   const newVersion = '1.0.0';
-  const previousVersion = '4';
   const dependencyPrefix = '@totvs/';
   const dependenciesExcluded = ['@totvs/thf-kendo', '@totvs/thf-theme-kendo', '@totvs/mobile-theme'];
 
@@ -17,7 +16,7 @@ function start(path, options) {
     migration.fileReader.setup(options);
 
     const checkVersion = migration.changePortinariVersion(
-      packagePath, dependencyPrefix, previousVersion, newVersion, dependenciesExcluded);
+      packagePath, dependencyPrefix, newVersion, dependenciesExcluded);
 
     if (checkVersion) {
       migration.convertDirectory(srcPath);

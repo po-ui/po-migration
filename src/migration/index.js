@@ -28,15 +28,16 @@ function convertDirectory(directory) {
 function changePortinariVersion(
   packageJsonFile,
   dependencyPrefix,
-  previousVersion,
   newVersion,
   dependenciesExcluded) {
+
+  const regex = /^\^[1-9][0-9]|[4-9]/g;
 
   const packageJson = fileReader.getFileSync(packageJsonFile);
 
   for (const dependency in packageJson.dependencies) {
-    
-    if (dependency.startsWith(dependencyPrefix) && !packageJson.dependencies[dependency].startsWith(previousVersion)) {
+
+    if (dependency.startsWith(dependencyPrefix) && !regex.test(packageJson.dependencies[dependency])) {
 
       return false;
     
