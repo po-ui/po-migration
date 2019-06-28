@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+
+const program = require('commander');
+const figlet = require('figlet');
+const package = require('../package.json');
+const start = require('../src/commands/start');
+
+program.version(package.version);
+
+program.on('--help', function() {
+  console.log(figlet.textSync('PO MIGRATION'));
+});
+
+program
+  .command('start')
+  .alias('s')
+  .description('Inicia a migração do projeto com THF para o Portinari.')
+  .option('-a --all', 'Atualiza todas as palavras do projeto que contém "thf, t-, ou totvs".', false)
+  .action((options) => {
+    const path = process.cwd();
+
+    start(path, options);
+  });
+
+program.parse(process.argv);
