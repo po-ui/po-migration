@@ -1,7 +1,7 @@
 {
-  "name": "thf-portinari-migration",
-  "version": "1.0.0",
-  "description": "CLI para migrar o projeto de THF para Portinari",
+  "name": "po-migration",
+  "version": "1.0.1",
+  "description": "CLI de migraçãp de projetos THF para Portinari UI",
   "bin": {
     "po-migration": "./bin/po-migration"
   },
@@ -9,8 +9,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Portinari UI",
+  "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.2",
     "commander": "^2.20.0",
