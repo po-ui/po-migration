@@ -33,10 +33,11 @@ function changePortinariVersion(
   dependenciesExcluded) {
 
   const packageJson = fileReader.getFileSync(packageJsonFile);
+  const previousVersionRegex = new RegExp(`^(\\^|\\~)?${previousVersion}\\..*$`);
 
   for (const dependency in packageJson.dependencies) {
     
-    if (dependency.startsWith(dependencyPrefix) && !packageJson.dependencies[dependency].startsWith(previousVersion)) {
+    if (dependency.startsWith(dependencyPrefix) && !previousVersionRegex.test(packageJson.dependencies[dependency])) {
 
       return false;
     
