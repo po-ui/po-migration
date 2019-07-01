@@ -2165,6 +2165,6 @@
   "thf-toaster-base": "po-toaster-base",
   "thf-ui": "portinari-ui",
   "thf-theme/": "style/",
-  "thf-theme-default": "portinari-theme-default",
+  "thf-theme-default": "po-theme-default",
   "@totvs": "@portinari"
 }
