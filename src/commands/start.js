@@ -7,7 +7,7 @@ function start(path, options) {
   const newVersion = '1.0.0';
   const previousVersion = '4';
   const dependencyPrefix = '@totvs/';
-  const dependenciesExcluded = ['@totvs/thf-kendo', '@totvs/thf-theme-kendo', '@totvs/mobile-theme'];
+  const dependenciesExcluded = ['@totvs/mingle', '@totvs/thf-kendo', '@totvs/thf-theme-kendo', '@totvs/mobile-theme'];
 
   const srcPath = pathNode.join(path, 'src');
   const angularPath = pathNode.join(path, 'angular.json');
