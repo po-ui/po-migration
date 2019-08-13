@@ -1,6 +1,7 @@
 const fileSystem = require('fs');
 const path = require('path');
 const fileReader = require('./replace.js');
+const thfPackages = require('./thfPackages');
 
 // Lendo o diretório
 function convertDirectory(directory) {
@@ -27,7 +28,6 @@ function convertDirectory(directory) {
 
 function changePortinariVersion(
   packageJsonFile,
-  dependencyPrefix,
   previousVersion,
   newVersion,
   dependenciesExcluded) {
@@ -35,24 +35,18 @@ function changePortinariVersion(
   const packageJson = fileReader.getFileSync(packageJsonFile);
   const previousVersionRegex = new RegExp(`^(\\^|\\~)?${previousVersion}\\..*$`);
 
-  // não deve validar se as dependencias @totvs/mingle e @totvs/mobile-theme estão na versão 4.
-  const unvalidatedDependencies = ['@totvs/mingle', '@totvs/mobile-theme'];
-
   for (const dependency in packageJson.dependencies) {
 
-    if (dependency.startsWith(dependencyPrefix) &&
-        !unvalidatedDependencies.includes(dependency) &&
-        !previousVersionRegex.test(packageJson.dependencies[dependency])) {
+    if (thfPackages.includes(dependency) && !previousVersionRegex.test(packageJson.dependencies[dependency])) {
 
       return false;
     
-    } else if (dependency.startsWith(dependencyPrefix) && !dependenciesExcluded.includes(dependency)) {
-      
-      packageJson.dependencies[dependency] = newVersion;
+    } else if (thfPackages.includes(dependency) && !dependenciesExcluded.includes(dependency)) {
 
+      packageJson.dependencies[dependency] = newVersion;
     }
-  
-  };
+
+  }
 
   fileReader.writeFileSync(packageJsonFile, JSON.stringify(packageJson, null, 2));
 
