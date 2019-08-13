@@ -68,8 +68,16 @@ function replaceFile(file) {
 function replaceByKeyWords(file) {
   const keyWordsJson = getKeyWordsJson();
 
-  // substitui o @totvs com exceção do @totvs/thf-kendo, @totvs/thf-theme-kendo, @totvs/mingle e @totvs/mobile-theme
-  let newFile = file.replace(/@totvs(?!(\/thf\-theme\-kendo)|(\/thf\-kendo)|(\/mingle)|(\/mobile\-theme))/g, '@portinari');
+  const regex = new RegExp([
+  '@totvs((\/thf\-ui)|',
+  '(\/thf\-storage)|',
+  '(\/thf\-templates)|',
+  '(\/thf\-sync)|',
+  '(\/thf\-code\-editor)|',
+  '(\/thf\-theme(?!\-kendo)))',
+  ].join(''), 'g');
+
+  let newFile = file.replace(regex, "@portinari$1");
 
   for (const keyWord in keyWordsJson) {
     // regex para pegar apenas a palavra
