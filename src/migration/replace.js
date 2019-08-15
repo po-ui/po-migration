@@ -9,7 +9,7 @@ function setup(options) {
 
 function getKeyWordsJson() {
   const fileNameKeyWords = __dirname + '/keyWords.json';
-  // fazer tratamento de erro
+  // fazer tratamento de erro 
   return getFileSync(fileNameKeyWords);
 }
 
@@ -119,7 +119,7 @@ function onError(filePath) {
 }
 
 function replacer(fileName) {
-  getFile(fileName)
+  return getFile(fileName)
     .then(file => replaceFile(file))
     .then(newDataFile => writeFile(fileName, newDataFile))
     .then(fileName => onUpdate(fileName))
@@ -128,7 +128,9 @@ function replacer(fileName) {
 
 module.exports = {
   getFileSync,
+  getFile,
   replacer,
   setup,
   writeFileSync,
+  writeFile
 }
