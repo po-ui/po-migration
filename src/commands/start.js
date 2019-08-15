@@ -9,8 +9,7 @@ const defaultTheme = 'totvs';
 
 async function start(path, options) {
   const previousVersion = '4';
-  const dependencyPrefix = '@totvs/';
-  const dependenciesExcluded = ['@totvs/thf-kendo', '@totvs/thf-theme-kendo', '@totvs/mobile-theme'];
+  const dependenciesExcluded = ['@totvs/thf-kendo', '@totvs/thf-theme-kendo'];
   const theme = options.theme ? options.theme : defaultTheme;
 
   const srcPath = pathNode.join(path, 'src');
@@ -20,8 +19,7 @@ async function start(path, options) {
   try {
     migration.fileReader.setup(options);
 
-    const checkVersion = migration.changePortinariVersion(
-      packagePath, dependencyPrefix, previousVersion, version, dependenciesExcluded);
+    const checkVersion = migration.changePortinariVersion(packagePath, previousVersion, version, dependenciesExcluded);
 
     if (checkVersion) {
       migration.convertDirectory(srcPath);
