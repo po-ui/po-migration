@@ -1,6 +1,7 @@
 const fileSystem = require('fs');
 const path = require('path');
 const fileReader = require('./replace.js');
+const thfPackages = require('./thfPackages');
 
 // Lendo o diretório
 function convertDirectory(directory) {
@@ -27,7 +28,6 @@ function convertDirectory(directory) {
 
 function changePortinariVersion(
   packageJsonFile,
-  dependencyPrefix,
   previousVersion,
   newVersion,
   dependenciesExcluded) {
@@ -36,18 +36,17 @@ function changePortinariVersion(
   const previousVersionRegex = new RegExp(`^(\\^|\\~)?${previousVersion}\\..*$`);
 
   for (const dependency in packageJson.dependencies) {
-    
-    if (dependency.startsWith(dependencyPrefix) && !previousVersionRegex.test(packageJson.dependencies[dependency])) {
+
+    if (thfPackages.includes(dependency) && !previousVersionRegex.test(packageJson.dependencies[dependency])) {
 
       return false;
     
-    } else if (dependency.startsWith(dependencyPrefix) && !dependenciesExcluded.includes(dependency)) {
-      
+    } else if (thfPackages.includes(dependency) && !dependenciesExcluded.includes(dependency)) {
+
       packageJson.dependencies[dependency] = newVersion;
-    
     }
-  
-  };
+
+  }
 
   fileReader.writeFileSync(packageJsonFile, JSON.stringify(packageJson, null, 2));
 
