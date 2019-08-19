@@ -20,7 +20,7 @@ async function updateStylesOfProjects(angularPath) {
 function updateThemeInProjectStyles(project, targetName, theme) {
   const targetOptions = getProjectTargetOptions(project, targetName);
 
-  if (targetOptions.styles) {
+  if (targetOptions && targetOptions.styles) {
     const styles = targetOptions.styles;
     const styleRegex = /node_modules\/(@totvs\/thf-theme)|(@portinari\/style)/;
 

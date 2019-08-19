@@ -129,7 +129,7 @@ function onError(filePath) {
 
 // regex especifico para a troca do tema, ja que o mesmo não se enquadra no regex padrão.
 function replaceThemeDependency(file) {
-  const themeRegex = new RegExp('@totvs\/thf\-theme(?!\-kendo)');
+  const themeRegex = new RegExp('@totvs\/thf\-theme(?!\-kendo)', 'g');
 
   return file.replace(themeRegex, '@portinari/style');
 }
