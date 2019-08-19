@@ -53,5 +53,4 @@ function configTheme(theme, angularPath, packagePath) {
   return Promise.resolve();
 }
 
-
 module.exports = start;
