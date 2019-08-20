@@ -9,7 +9,7 @@ function setup(options) {
 
 function getKeyWordsJson() {
   const fileNameKeyWords = __dirname + '/keyWords.json';
-  // fazer tratamento de erro
+  // fazer tratamento de erro 
   return getFileSync(fileNameKeyWords);
 }
 
@@ -73,11 +73,12 @@ function replaceByKeyWords(file) {
   '(\/thf\-storage)|',
   '(\/thf\-templates)|',
   '(\/thf\-sync)|',
-  '(\/thf\-code\-editor)|',
-  '(\/thf\-theme(?!\-kendo)))',
+  '(\/thf\-code\-editor))',
   ].join(''), 'g');
 
-  let newFile = file.replace(regex, "@portinari$1");
+  let newFile = file.replace(regex, '@portinari$1');
+
+  newFile = replaceThemeDependency(newFile);
 
   for (const keyWord in keyWordsJson) {
     // regex para pegar apenas a palavra
@@ -126,8 +127,15 @@ function onError(filePath) {
   console.log(chalk.red('Arquivo não encontrado: '), filePath);
 }
 
+// regex especifico para a troca do tema, ja que o mesmo não se enquadra no regex padrão.
+function replaceThemeDependency(file) {
+  const themeRegex = new RegExp('@totvs\/thf\-theme(?!\-kendo)', 'g');
+
+  return file.replace(themeRegex, '@portinari/style');
+}
+
 function replacer(fileName) {
-  getFile(fileName)
+  return getFile(fileName)
     .then(file => replaceFile(file))
     .then(newDataFile => writeFile(fileName, newDataFile))
     .then(fileName => onUpdate(fileName))
@@ -136,7 +144,9 @@ function replacer(fileName) {
 
 module.exports = {
   getFileSync,
+  getFile,
   replacer,
   setup,
   writeFileSync,
+  writeFile
 }

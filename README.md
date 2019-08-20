@@ -42,6 +42,17 @@ Este comando atualiza todas as palavras do projeto que contém "thf, t-, ou totv
 > Ao utilizar a opção `--all` certifique-se que não foi alterado nenhuma palavra que faça parte
 do caminho de algum arquivo, que você possa ter colocado com o nome contendo algumas das palavras "thf, t-, ou totvs".
 
+Por padrão a migração utilizará o tema da TOTVS, instalando o pacote `@totvs/portinari-theme` e configurando o seu tema no
+arquivo `angular.json`.
+
+Caso queira migrar para o tema do Portinari, utilize o parametro `--theme`, exemplo abaixo:
+
+```
+po-migration start --theme portinari
+```
+
+> Após realizar a migração, será executado `npm install` para instalar as novas dependencias.
+
 Veja a documentação completa do pacote `po-migration` executando o comando:
 
 ```
