@@ -2166,5 +2166,8 @@
   "thf-ui": "portinari-ui",
   "thf-theme/": "style/",
   "thf-theme-default": "po-theme-default",
-  "@totvs": "@portinari"
+  "@totvs": "@portinari",
+  "X-Totvs-Screen-Lock": "X-Portinari-Screen-Lock",
+  "X-Totvs-No-Count-Pending-Requests": "X-Portinari-No-Count-Pending-Requests",
+  "X-Totvs-No-Error": "X-Portinari-No-Error"
 }
