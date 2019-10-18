@@ -1,7 +1,7 @@
 {
   "name": "po-migration",
-  "version": "1.1.0",
-  "description": "CLI de migraçãp de projetos THF para Portinari UI",
+  "version": "1.2.0",
+  "description": "CLI de migração de projetos THF para Portinari UI",
   "bin": {
     "po-migration": "./bin/po-migration"
   },
