@@ -1,7 +1,11 @@
 {
   "name": "po-migration",
-  "version": "1.2.0",
-  "description": "CLI de migração de projetos THF para Portinari UI",
+  "version": "1.3.0",
+  "description": "CLI de migração de projetos THF para PO UI",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/po-ui/po-migration"
+  },
   "bin": {
     "po-migration": "./bin/po-migration"
   },
@@ -9,7 +13,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc"
   },
-  "author": "Portinari UI",
+  "author": "PO UI",
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.2",

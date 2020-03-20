@@ -7,45 +7,34 @@ const thfPackages = require('./thfPackages');
 function convertDirectory(directory) {
   const files = fileSystem.readdirSync(directory);
 
-  for (let i=0; i < files.length; i++) {
+  for (let i = 0; i < files.length; i++) {
     // path.step recupera o separador específico do SO
     const file = `${directory}${path.sep}${files[i]}`;
 
-    if((/(\.(gif|jpg|jpeg|tiff|png|ico|git))|(node_modules)$/i).test(file)) {
+    if (/(\.(gif|jpg|jpeg|tiff|png|ico|git))|(node_modules)$/i.test(file)) {
       continue;
     }
 
     const stats = fileSystem.statSync(file);
 
-    if(stats.isFile()) {
+    if (stats.isFile()) {
       fileReader.replacer(file);
-
-    } else if(stats.isDirectory()) {
+    } else if (stats.isDirectory()) {
       convertDirectory(file);
     }
   }
 }
 
-function changePortinariVersion(
-  packageJsonFile,
-  previousVersion,
-  newVersion,
-  dependenciesExcluded) {
-
+function changePoVersion(packageJsonFile, previousVersion, newVersion, dependenciesExcluded) {
   const packageJson = fileReader.getFileSync(packageJsonFile);
   const previousVersionRegex = new RegExp(`^(\\^|\\~)?${previousVersion}\\..*$`);
 
   for (const dependency in packageJson.dependencies) {
-
     if (thfPackages.includes(dependency) && !previousVersionRegex.test(packageJson.dependencies[dependency])) {
-
       return false;
-    
     } else if (thfPackages.includes(dependency) && !dependenciesExcluded.includes(dependency)) {
-
       packageJson.dependencies[dependency] = newVersion;
     }
-
   }
 
   fileReader.writeFileSync(packageJsonFile, JSON.stringify(packageJson, null, 2));
@@ -53,4 +42,4 @@ function changePortinariVersion(
   return true;
 }
 
-module.exports = { changePortinariVersion, convertDirectory, fileReader };
+module.exports = { changePoVersion, convertDirectory, fileReader };

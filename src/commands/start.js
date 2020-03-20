@@ -19,7 +19,7 @@ async function start(path, options) {
   try {
     migration.fileReader.setup(options);
 
-    const checkVersion = migration.changePortinariVersion(packagePath, previousVersion, version, dependenciesExcluded);
+    const checkVersion = migration.changePoVersion(packagePath, previousVersion, version, dependenciesExcluded);
 
     if (checkVersion) {
       migration.convertDirectory(srcPath);
@@ -30,16 +30,13 @@ async function start(path, options) {
       await configTheme(theme, angularPath, packagePath);
 
       package.install();
-
     } else {
       console.log(chalk.yellow('ATENÇÃO: '), 'Não foi possível realizar a conversão!');
       console.log(chalk.yellow(`É necessário que o projeto esteja com a versão ${previousVersion} do THF.`));
     }
-
-  } catch(e) {
+  } catch (e) {
     console.error(e);
   }
-
 }
 
 function configTheme(theme, angularPath, packagePath) {

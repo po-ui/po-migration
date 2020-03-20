@@ -14,10 +14,10 @@ program.on('--help', function() {
 program
   .command('start')
   .alias('s')
-  .description('Inicia a migração do projeto com THF para o Portinari.')
+  .description('Inicia a migração do projeto com THF para o PO UI.')
   .option('-a --all', 'Atualiza todas as palavras do projeto que contém "thf, t-, ou totvs".', false)
-  .option('-t --theme <theme>', 'Tema a ser utilizado no projeto, podendo ser: totvs ou portinari. O padrão é totvs', 'totvs')
-  .action((options) => {
+  .option('-t --theme <theme>', 'Tema a ser utilizado no projeto, podendo ser: totvs ou po. O padrão é totvs', 'totvs')
+  .action(options => {
     const path = process.cwd();
 
     start(path, options);
